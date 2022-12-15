@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\Database\Migrations\" />
+    <Folder Include="Infrastructure\Implementations\" />
+    <Folder Include="Infrastructure\Interfaces\" />
+    <Folder Include="Infrastructure\Models\" />
+    <Folder Include="Infrastructure\Interfaces\Dto\" />
+    <Folder Include="Infrastructure\Interfaces\Query\" />
+    <Folder Include="Infrastructure\Query\" />
+    <Folder Include="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Infrastructure\Implementations\" />
+    <None Remove="Infrastructure\Interfaces\" />
+    <None Remove="Infrastructure\Models\" />
+    <None Remove="Infrastructure\Interfaces\Dto\" />
+    <None Remove="Infrastructure\Interfaces\Query\" />
+    <None Remove="Infrastructure\Query\" />
+    <None Remove="Enums\" />
+  </ItemGroup>
+</Project>
