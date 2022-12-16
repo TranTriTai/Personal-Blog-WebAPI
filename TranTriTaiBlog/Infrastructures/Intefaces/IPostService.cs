@@ -21,6 +21,8 @@ namespace TranTriTaiBlog.Infrastructures.Intefaces
         Task<CommonResponse<string>> DeletePost(Guid postId);
 
         Task<CommonResponse<ListPostResponse>> GetListPostsWithPagination(PaginationRequest request);
+
+        Task<CommonResponse<ListPostResponse>> SearchPosts(SearchPostsRequest request);
     }
 }
 

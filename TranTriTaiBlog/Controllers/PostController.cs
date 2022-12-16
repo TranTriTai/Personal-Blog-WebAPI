@@ -148,6 +148,21 @@ namespace TranTriTaiBlog.Controllers
 
             return StatusCode(result.StatusCode, result);
         }
+
+        /// Post api/posts/search
+        /// <summary>
+        /// get list of posts by searching
+        /// </summary>
+        /// <returns>CommonResponse with list of posts</returns>
+        [SwaggerOperation(Summary = "Get list of posts by searching")]
+        [HttpPost("search",Name = "SearchPosts")]
+        [ProducesResponseType(typeof(CommonResponse<ListPostResponse>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> SearchPosts([FromBody] SearchPostsRequest request)
+        {
+            var result = await _postService.SearchPosts(request);
+
+            return StatusCode(result.StatusCode, result);
+        }
     }
 }
 

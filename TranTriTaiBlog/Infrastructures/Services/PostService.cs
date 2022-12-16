@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
 using DataModel.Infrastructure.Interfaces;
 using DataModel.Infrastructure.Models;
@@ -11,6 +12,7 @@ using TranTriTaiBlog.Infrastructures.Constants;
 using TranTriTaiBlog.Infrastructures.Helper.Constants;
 using TranTriTaiBlog.Infrastructures.Helper.MessageUtil;
 using TranTriTaiBlog.Infrastructures.Intefaces;
+using TranTriTaiBlog.Infrastructures.Intefaces.UserServices;
 using TranTriTaiBlog.Infrastructures.Services.UserServices;
 
 namespace TranTriTaiBlog.Infrastructures.Services
@@ -309,6 +311,69 @@ namespace TranTriTaiBlog.Infrastructures.Services
                 _logger.LogError(ex, $"Error at ${nameof(DeletePost)} :" + ex.Message);
                 throw new Exception(ErrorMsgUtil.GetErrWhenGetting(nameof(Post)));
             }
+        }
+
+        public async Task<CommonResponse<ListPostResponse>> SearchPosts(SearchPostsRequest request)
+        {
+            if (request == null)
+            {
+                request = new SearchPostsRequest();
+            }
+
+            try
+            {
+                IQueryable<Post> queryable = FilterPosts(request);
+
+                Post[] result = await queryable
+                    .Skip(request.GetSkip())
+                    .Take(request.Size)
+                    .ToArrayAsync();
+
+                int totalCount = await queryable.CountAsync();
+
+                if (totalCount == 0)
+                {
+                    return new CommonResponse<ListPostResponse>(StatusCodes.Status204NoContent);
+                }
+
+                var response = _mapper.Map<ListPostResponse>(result);
+                response.Pagination = new PaginationResponse(request, totalCount);
+                return new CommonResponse<ListPostResponse>(StatusCodes.Status200OK, response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error at ${nameof(SearchPosts)} :" + ex.Message);
+                throw new Exception(ErrorMsgUtil.GetErrWhenGetting(nameof(Post)));
+            }
+        }
+
+        private IQueryable<Post> FilterPosts(SearchPostsRequest request)
+        {
+            IRepository<Post> repo = _unitOfWork.GetRepository<Post>();
+            IQueryable<Post> posts = repo.GetQueryable()
+                .OrderByDescending(x => x.CreatedAt);
+
+            if (string.IsNullOrEmpty(request.Title) == false)
+            {
+                posts = posts.Where(x => x.Title.Contains(request.Title));
+            }
+
+            if (string.IsNullOrEmpty(request.Description) == false)
+            {
+                posts = posts.Where(x => x.Description.Contains(request.Description));
+            }
+
+            if (string.IsNullOrEmpty(request.Tag) == false)
+            {
+                posts = posts.Where(x => x.Tag.Contains(request.Tag));
+            }
+
+            if (string.IsNullOrEmpty(request.ReadingDuration) == false)
+            {
+                posts = posts.Where(x => x.ReadingDuration.Contains(request.ReadingDuration));
+            }
+
+            return posts;
         }
 
         private Dictionary<string, string> ValidateCreateCategoryRequest(CreateCategoryRequest request)

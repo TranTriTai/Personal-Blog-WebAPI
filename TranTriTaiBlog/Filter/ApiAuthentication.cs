@@ -37,7 +37,7 @@ namespace TranTriTaiBlog.Filter
             }
         }
 
-        public Guid ExtractUserIdFromToken(HttpRequest request)
+        private Guid ExtractUserIdFromToken(HttpRequest request)
         {
             string token = request.Headers["Authorization"].ToString();
             if (token.Length > 0)

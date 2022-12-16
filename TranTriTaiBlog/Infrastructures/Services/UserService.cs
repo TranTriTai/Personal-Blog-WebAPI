@@ -396,7 +396,7 @@ namespace TranTriTaiBlog.Infrastructures.Services.UserServices
                 if (token == null)
                 {
                     return new CommonResponse<string>(StatusCodes.Status404NotFound,
-                        ErrorMsgUtil.GetCannotFindMsg(nameof(Skill)), null);
+                        ErrorMsgUtil.GetCannotFindMsg(nameof(Login)), null);
                 }
 
                 repo.HardDelete(token);
