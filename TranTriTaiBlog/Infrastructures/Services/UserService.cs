@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using DataModel.Enums;
 using DataModel.Infrastructure.Interfaces;
 using DataModel.Infrastructure.Interfaces.Query;
 using DataModel.Infrastructure.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using TranTriTaiBlog.DTOs.Requests;
 using TranTriTaiBlog.DTOs.Responses;
@@ -214,7 +220,7 @@ namespace TranTriTaiBlog.Infrastructures.Services.UserServices
             try
             {
                 var inValids = ValidateUpdateUserDetailRequest(request);
-                if (inValids.Count > 0)
+                if (inValids.Count() > 0)
                 {
                     return new CommonResponse<UpdateUserDetailResponse>(StatusCodes.Status400BadRequest,
                     ErrorMsgUtil.GetBadRequestMsg(nameof(User)), null);

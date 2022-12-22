@@ -23,6 +23,17 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "environmentVariables": {
+        "TokenExpiryTime": "15",
+        "Key": "Value",
+        "ConnectionStrings": "server=mysql;uid=root;pwd=benztaii;database=TranTriTaiBlog",
+        "TOKEN_SECRET": "my-32-character-ultra-secure-and-ultra-long-secret"
+      }
     }
   }
 }

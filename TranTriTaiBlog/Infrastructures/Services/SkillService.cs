@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using DataModel.Enums;
 using DataModel.Infrastructure.Interfaces;
 using DataModel.Infrastructure.Interfaces.Query;
 using DataModel.Infrastructure.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using TranTriTaiBlog.DTOs.Requests;
 using TranTriTaiBlog.DTOs.Responses;
 using TranTriTaiBlog.Infrastructures.Constants;
@@ -17,11 +22,11 @@ namespace TranTriTaiBlog.Infrastructures.Services
     public class SkillService : ISkillService 
     {
         private readonly IMapper _mapper;
-        private readonly ILogger<UserService> _logger;
+        private readonly ILogger<SkillService> _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISkillQuery _query;
 
-        public SkillService(IMapper mapper, ILogger<UserService> logger,
+        public SkillService(IMapper mapper, ILogger<SkillService> logger,
             IUnitOfWork unitOfWork, ISkillQuery query)
         {
             _mapper = mapper;
@@ -135,7 +140,7 @@ namespace TranTriTaiBlog.Infrastructures.Services
             try
             {
                 var inValids = ValidateUpdateSkillRequest(request);
-                if (inValids.Count > 0 || Enum.IsDefined(typeof(Domain), request?.Domain) == false)
+                if (inValids.Count() > 0 || Enum.IsDefined(typeof(Domain), request?.Domain) == false)
                 {
                     return new CommonResponse<UpdateSkillResponse>(StatusCodes.Status400BadRequest,
                     ErrorMsgUtil.GetBadRequestMsg(nameof(Skill)), null);

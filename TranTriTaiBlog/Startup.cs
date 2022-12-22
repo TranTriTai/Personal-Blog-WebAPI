@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 using AutoMapper;
@@ -9,8 +10,12 @@ using DataModel.Infrastructure.Interfaces.Query;
 using DataModel.Infrastructure.Models;
 using DataModel.Infrastructure.Query;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using TranTriTaiBlog.Filter;
@@ -110,7 +115,7 @@ namespace TranTriTaiBlog
 
         private void AddDbContext(IServiceCollection services)
         {
-            var connstr = Configuration.GetConnectionString("DefaultConnection");
+            var connstr = Environment.GetEnvironmentVariable(EnvironmentConstant.ConnectionString);
             services.AddDbContext<BlogDbContext>(o =>
             {
                 o.UseLazyLoadingProxies();
@@ -155,7 +160,7 @@ namespace TranTriTaiBlog
 
         private void AddTokenAuthentication(IServiceCollection services)
         {
-            var secret = Configuration.GetConnectionString("TokenSecret");
+            var secret = Environment.GetEnvironmentVariable(EnvironmentConstant.TokenSecret);
             var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>
             {

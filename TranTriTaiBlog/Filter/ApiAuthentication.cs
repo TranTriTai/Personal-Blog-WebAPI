@@ -1,8 +1,12 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TranTriTaiBlog.DTOs.Responses;
 using TranTriTaiBlog.Infrastructures.Helper.MessageUtil;
 using TranTriTaiBlog.Infrastructures.Intefaces.UserServices;

@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using DataModel.Infrastructure.Interfaces;
 using DataModel.Infrastructure.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using TranTriTaiBlog.DTOs.Requests;
 using TranTriTaiBlog.DTOs.Responses;
 using TranTriTaiBlog.Filter;
@@ -20,10 +24,10 @@ namespace TranTriTaiBlog.Infrastructures.Services
     public partial class PostService : IPostService
     {
         private readonly IMapper _mapper;
-        private readonly ILogger<UserService> _logger;
+        private readonly ILogger<PostService> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PostService(IMapper mapper, ILogger<UserService> logger,
+        public PostService(IMapper mapper, ILogger<PostService> logger,
             IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
@@ -84,7 +88,7 @@ namespace TranTriTaiBlog.Infrastructures.Services
             try
             {
                 var inValids = ValidateAddPostRequest(request);
-                if (inValids.Count > 0)
+                if (inValids.Count() > 0)
                 {
                     return new CommonResponse<AddPostResponse>(StatusCodes.Status400BadRequest,
                     ErrorMsgUtil.GetBadRequestMsg(nameof(Post)), null);
@@ -181,7 +185,7 @@ namespace TranTriTaiBlog.Infrastructures.Services
             try
             {
                 var inValids = ValidateUpdateCategoryRequest(request);
-                if (inValids.Count > 0)
+                if (inValids.Count() > 0)
                 {
                     return new CommonResponse<UpdateCategoryResponse>(StatusCodes.Status400BadRequest,
                     ErrorMsgUtil.GetBadRequestMsg(nameof(Category)), null);
@@ -219,7 +223,7 @@ namespace TranTriTaiBlog.Infrastructures.Services
             try
             {
                 var inValids = ValidateUpdatePostRequest(request);
-                if (inValids.Count > 0)
+                if (inValids.Count() > 0)
                 {
                     return new CommonResponse<UpdatePostResponse>(StatusCodes.Status400BadRequest,
                     ErrorMsgUtil.GetBadRequestMsg(nameof(Post)), null);

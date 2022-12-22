@@ -2,8 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>TranTriTaiBlog</RootNamespace>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>06585e6b-a40f-4201-9478-4253228ee01f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,47 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Swashbuckle.AspNetCore.SwaggerUI" />
-    <None Remove="Swashbuckle.AspNetCore.SwaggerGen" />
-    <None Remove="Swashbuckle.AspNetCore.Swagger" />
-    <None Remove="Swashbuckle.AspNetCore.Annotations" />
-    <None Remove="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
-    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
-    <None Remove="BCrypt.Net-Next" />
-    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
-    <None Remove="AutoMapper" />
-    <None Remove="Microsoft.EntityFrameworkCore" />
-    <None Remove="Microsoft.EntityFrameworkCore.Design" />
-    <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
-    <None Remove="Infrastructures\" />
-    <None Remove="Infrastructures\AutoMappers\" />
-    <None Remove="Pomelo.EntityFrameworkCore.MySql" />
-    <None Remove="DTOs\" />
-    <None Remove="DTOs\Requests\" />
-    <None Remove="DTOs\Responses\" />
-    <None Remove="Infrastructures\Services\" />
-    <None Remove="Infrastructures\Intefaces\" />
-    <None Remove="Infrastructures\Helper\" />
-    <None Remove="Infrastructures\Helper\Constants\" />
-    <None Remove="Infrastructures\Helper\MessageUtil\" />
-    <None Remove="Filter\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructures\" />
-    <Folder Include="Infrastructures\AutoMappers\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="DTOs\Requests\" />
-    <Folder Include="DTOs\Responses\" />
-    <Folder Include="Infrastructures\Services\" />
-    <Folder Include="Infrastructures\Intefaces\" />
-    <Folder Include="Infrastructures\Helper\" />
-    <Folder Include="Infrastructures\Helper\Constants\" />
-    <Folder Include="Infrastructures\Helper\MessageUtil\" />
-    <Folder Include="Filter\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataModel\DataModel.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
+    <ProjectReference Include="..\DataModel\DataModel.csproj" />
   </ItemGroup>
 </Project>
