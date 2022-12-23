@@ -115,6 +115,7 @@ namespace TranTriTaiBlog
 
         private void AddDbContext(IServiceCollection services)
         {
+            //var connstr = Configuration.GetConnectionString("DefaultConnection");
             var connstr = Environment.GetEnvironmentVariable(EnvironmentConstant.ConnectionString);
             services.AddDbContext<BlogDbContext>(o =>
             {
@@ -160,6 +161,7 @@ namespace TranTriTaiBlog
 
         private void AddTokenAuthentication(IServiceCollection services)
         {
+            //var secret = Configuration.GetConnectionString("TokenSecret");
             var secret = Environment.GetEnvironmentVariable(EnvironmentConstant.TokenSecret);
             var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>
@@ -192,9 +194,6 @@ namespace TranTriTaiBlog
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<IPostService, PostService>();
-
-            //services.AddSingleton<ApiAuthentication>();
-            //services.AddSingleton<HttpContent>();
         }
     }
 }
