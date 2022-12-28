@@ -117,6 +117,7 @@ namespace TranTriTaiBlog
         {
             //var connstr = Configuration.GetConnectionString("DefaultConnection");
             var connstr = Environment.GetEnvironmentVariable(EnvironmentConstant.ConnectionString);
+            Console.WriteLine("mysqldb" + connstr);
             services.AddDbContext<BlogDbContext>(o =>
             {
                 o.UseLazyLoadingProxies();
@@ -163,6 +164,7 @@ namespace TranTriTaiBlog
         {
             //var secret = Configuration.GetConnectionString("TokenSecret");
             var secret = Environment.GetEnvironmentVariable(EnvironmentConstant.TokenSecret);
+            Console.WriteLine("aloalo:" + secret);
             var key = Encoding.ASCII.GetBytes(secret);
             services.AddAuthentication(x =>
             {

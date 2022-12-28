@@ -34,7 +34,7 @@
       "environmentVariables": {
         "TOKEN_EXPIRY_MINUTE": "5",
         "Key": "Value",
-        "CONNECTION_STRING": "server=datamodel;uid=root;pwd=benztaii;database=trantritaiblog",
+        "CONNECTION_STRING": "server=host.docker.internal;uid=root;pwd=benztaii;database=trantritaiblog",
         "TOKEN_SECRET": "PDv7DrqznYL6nv7DrqzjnQYO9JxIsWdcjnQYL6nu0f"
       }
     }
